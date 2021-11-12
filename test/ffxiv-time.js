@@ -1,10 +1,10 @@
-import * as assert from 'assert';
+const assert = require('assert');
 
-import { getTime } from '../index.js';
+const { getTime } = require('../src/ffxiv-time');
 
 describe('ffxiv-time', () => {
     const tt = {
-        '1627312769435': '10:06',
+        1627312769435: '10:06',
     };
 
     Object.keys(tt)
@@ -22,5 +22,5 @@ describe('ffxiv-time', () => {
                     assert.strictEqual(actualValue, expectedValue);
                 });
             });
-        })
+        });
 });

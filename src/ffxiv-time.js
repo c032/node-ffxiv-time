@@ -1,10 +1,10 @@
-export const FACTOR = 144 / 7;
+const FACTOR = 144 / 7;
 
 function format(timePart) {
-    return ('0' + timePart.toString()).substr(-2);
+    return `0${timePart}`.substr(-2);
 }
 
-export function getTime(msSinceEpoch = Date.now()) {
+function getTime(msSinceEpoch = Date.now()) {
     let ms = msSinceEpoch;
     if (ms instanceof Date) {
         ms = ms.getTime();
@@ -23,3 +23,8 @@ export function getTime(msSinceEpoch = Date.now()) {
 
     return time;
 }
+
+module.exports = {
+    FACTOR,
+    getTime,
+};
