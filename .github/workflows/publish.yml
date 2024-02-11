@@ -44,12 +44,16 @@ jobs:
         run: |
           mv -v 'worktree-master/package.json' .
 
+      - name: "Move `LICENSE`."
+        run: |
+          mv -v 'worktree-master/LICENSE' '.' || true
+
       - name: "Cleanup `package.json`."
         run: |
           set -x -e -u -o pipefail
 
           node -p -e 'Object.keys(require("./package.json")).join("\n")' \
-          | grep -vE '^(name|version|private)$' \
+          | grep -vE '^(name|version|private|license)$' \
           | sed -r 's@^@npm pkg delete @g' \
           | sh
 
