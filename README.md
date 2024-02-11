@@ -5,13 +5,15 @@ Get current Eorzea time.
 ## Example
 
 ```node
-const { getTime } = require('ffxiv-time');
+import { getTime } from "ffxiv-time";
 
-const time = getTime(); //==> '01:23'
+const time = getTime();
+
+console.log(time.toString()); //==> '01:23'
 console.log(time.hours); //==> 1
 console.log(time.minutes); //==> 23
 ```
 
 ## License
 
-Apache 2.0
+MPL 2.0.
