@@ -13,12 +13,11 @@ function assertString(v) {
     const tt = {
         1627312769435: "10:06",
     };
-    Object.keys(tt)
-        .map((key) => ({
-        input: parseInt(key, 10),
+    const testCases = Object.keys(tt).map((key) => ({
+        input: Number.parseInt(key, 10),
         expectedValue: assertString(tt[key]),
-    }))
-        .forEach(({ input, expectedValue }) => {
+    }));
+    for (const { input, expectedValue } of testCases) {
         const msSinceEpoch = input;
         (0, node_test_1.describe)(`getTime(${msSinceEpoch}).toString()`, () => {
             const printableValue = JSON.stringify(expectedValue);
@@ -27,5 +26,5 @@ function assertString(v) {
                 node_assert_1.strict.equal(actualValue, expectedValue);
             });
         });
-    });
+    }
 });

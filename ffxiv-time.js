@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTime = exports.Time = exports.FACTOR = void 0;
+exports.Time = exports.FACTOR = void 0;
+exports.getTime = getTime;
 exports.FACTOR = 144 / 7;
 class Time {
     t;
@@ -30,4 +31,3 @@ function getTime(jsTime = Date.now()) {
     }
     throw new Error(`Can't create time from value: ${jsTime}`);
 }
-exports.getTime = getTime;
