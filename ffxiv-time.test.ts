@@ -4,43 +4,43 @@ import { strict as assert } from "node:assert";
 import { getTime } from "./ffxiv-time";
 
 interface PlainObject {
-  [key: string]: unknown | undefined;
+	[key: string]: unknown | undefined;
 }
 
 interface TestCase<TInput, TExpectedValue> {
-  input: TInput;
-  expectedValue: TExpectedValue;
+	input: TInput;
+	expectedValue: TExpectedValue;
 }
 
 function assertString(v: unknown): string {
-  if (typeof v !== "string") {
-    throw new Error(`not a string: ${v}`);
-  }
+	if (typeof v !== "string") {
+		throw new Error(`not a string: ${v}`);
+	}
 
-  return v;
+	return v;
 }
 
 describe("ffxiv-time", () => {
-  const tt: PlainObject = {
-    1627312769435: "10:06",
-  };
+	const tt: PlainObject = {
+		1627312769435: "10:06",
+	};
 
-  Object.keys(tt)
-    .map<TestCase<number, string>>((key) => ({
-      input: parseInt(key, 10),
-      expectedValue: assertString(tt[key]),
-    }))
-    .forEach(({ input, expectedValue }) => {
-      const msSinceEpoch = input;
+	const testCases = Object.keys(tt).map<TestCase<number, string>>((key) => ({
+		input: Number.parseInt(key, 10),
+		expectedValue: assertString(tt[key]),
+	}));
 
-      describe(`getTime(${msSinceEpoch}).toString()`, () => {
-        const printableValue = JSON.stringify(expectedValue);
+	for (const { input, expectedValue } of testCases) {
+		const msSinceEpoch = input;
 
-        it(`returns ${printableValue}`, () => {
-          const actualValue = getTime(msSinceEpoch).toString();
+		describe(`getTime(${msSinceEpoch}).toString()`, () => {
+			const printableValue = JSON.stringify(expectedValue);
 
-          assert.equal(actualValue, expectedValue);
-        });
-      });
-    });
+			it(`returns ${printableValue}`, () => {
+				const actualValue = getTime(msSinceEpoch).toString();
+
+				assert.equal(actualValue, expectedValue);
+			});
+		});
+	}
 });
